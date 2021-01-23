@@ -1,0 +1,1 @@
+{ "express" : { "port" : 80 }, "postgres": { "db" : "prueba-api-rest-bryana", "user" : "postgres", "password" : "", "host" : "localhost" } } 
