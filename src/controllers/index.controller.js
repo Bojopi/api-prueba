@@ -18,10 +18,10 @@ const getProduct = async (req, res) => {
 }
 
 const getProductById = async (req, res) => {
-    const id = req.params.id
+    const id = req.params.productId
     const response = await pool.query('SELECT * FROM products WHERE prod_id = $1', [id])
-    console.log(response.rows)
-    res.status(200).send({products: response.rows})
+	//console.log(response.rows)
+	res.status(200).send({products: response.rows})
 }
 
 const postProduct = async (req, res) => {
@@ -38,8 +38,24 @@ const postProduct = async (req, res) => {
                         })
 }
 
+const putProduct = async (req, res) => {
+	const id = req.params.productId
+	const {name, price, photo, category} = req.body
+	console.log(id, name, price, photo, category)
+	res.send('User updated')
+}
+
+const deleteProduct = async (req, res) => {
+	const id = req.params.productId
+	const response = await pool.query('DELETE FROM products WHERE prod_id = $1', [id])
+	console.log(response)
+	res.status(200).send(`User ${id} deleted successfully!`)
+}
+
 module.exports = {
     getProduct,
     getProductById,
 	postProduct,
+	putProduct,
+	deleteProduct
 }
